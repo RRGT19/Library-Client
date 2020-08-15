@@ -1,0 +1,32 @@
+<div class="row">
+
+  <ng-container *ngIf="books.length > 0; else noBooks">
+
+    <!-- Grid.
+         This component is responsible of assigning the col size of the childs.
+         This means that we can edit the design of the grid at any time,
+         in case that the requirements have changed and force us to have
+         more or less columns in a row.
+         How to test: change the "col-md-6" to "col-md-4".
+    -->
+    <div class="col-md-6" *ngFor="let b of books">
+
+      <app-book-card [book]="b"></app-book-card>
+      <!-- ./app-book-card -->
+
+    </div>
+    <!-- ./col-md-* -->
+
+  </ng-container>
+  <!-- ./ng-container -->
+
+</div>
+<!-- ./row -->
+
+<ng-template #noBooks>
+  <div class="col-md-12">
+    <div class="alert alert-info" role="alert">
+      There are no books yet. Our library is empty at this moment.
+    </div>
+  </div>
+</ng-template>

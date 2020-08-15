@@ -1,3 +1,16 @@
+<div class="row mb-3">
+  <div class="col text-right">
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-secondary active">
+        <input type="radio" name="options" id="option1" (click)="changeColSize(6)" checked> 6
+      </label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="options" id="option2" (click)="changeColSize(4)"> 4
+      </label>
+    </div>
+  </div>
+</div>
+
 <div class="row">
 
   <ng-container *ngIf="books.length > 0; else noBooks">
@@ -9,7 +22,7 @@
          more or less columns in a row.
          How to test: change the "col-md-6" to "col-md-4".
     -->
-    <div class="col-md-6" *ngFor="let b of books">
+    <div class="col-md-{{colSize}}" *ngFor="let b of books">
 
       <app-book-card [book]="b"></app-book-card>
       <!-- ./app-book-card -->

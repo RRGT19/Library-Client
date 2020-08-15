@@ -13,6 +13,7 @@ import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
 import {BookFakeService} from "./shared/services/book-fake.service";
 import { BookCardComponent } from './shared/components/book-card/book-card.component';
 import { BookListGridComponent } from './shared/components/book-list-grid/book-list-grid.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { BookListGridComponent } from './shared/components/book-list-grid/book-l
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule,
     environment.production ?
       [] : HttpClientInMemoryWebApiModule.forRoot(BookFakeService, {delay: 1500}) // 1.5 second delay

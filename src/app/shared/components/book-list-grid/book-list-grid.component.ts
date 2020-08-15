@@ -14,6 +14,7 @@ import {IBook} from "../../interfaces/book";
 export class BookListGridComponent implements OnInit {
 
   @Input() books: IBook[];
+  colSize: string | number = 6;
 
   ngOnInit(): void {
     this.validateInputProps();
@@ -23,6 +24,10 @@ export class BookListGridComponent implements OnInit {
     if (!this.books) {
       throw new TypeError("You must pass a list of books.");
     }
+  }
+
+  changeColSize(size: string | number) {
+    this.colSize = size;
   }
 
 }

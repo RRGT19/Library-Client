@@ -1,15 +1,7 @@
-<div class="row mb-3">
-  <div class="col text-right">
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <label class="btn btn-secondary active">
-        <input type="radio" name="options" id="option1" (click)="changeColSize(6)" checked> 6
-      </label>
-      <label class="btn btn-secondary">
-        <input type="radio" name="options" id="option2" (click)="changeColSize(4)"> 4
-      </label>
-    </div>
-  </div>
-</div>
+<!-- Buttons to change the col sizes.
+     Totally optional by the parent.
+-->
+<app-col-size-buttons *ngIf="withColSizeOptions" (colSizeHasChanged)="changeColSize($event)"></app-col-size-buttons>
 
 <div class="row">
 
@@ -22,7 +14,7 @@
          more or less columns in a row.
          How to test: change the "col-md-6" to "col-md-4".
     -->
-    <div class="col-md-{{colSize}}" *ngFor="let b of books">
+    <div class="col-md-{{colSize}}" *ngFor="let b of books" [@fadeInOut]>
 
       <app-book-card [book]="b"></app-book-card>
       <!-- ./app-book-card -->

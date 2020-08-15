@@ -1,4 +1,3 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -11,9 +10,11 @@ import {HttpClientModule} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
 import {BookFakeService} from "./shared/services/book-fake.service";
-import { BookCardComponent } from './shared/components/book-card/book-card.component';
-import { BookListGridComponent } from './shared/components/book-list-grid/book-list-grid.component';
+import {BookCardComponent} from './shared/components/book-card/book-card.component';
+import {BookListGridComponent} from './shared/components/book-list-grid/book-list-grid.component';
 import {FormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ColSizeButtonsComponent} from './shared/components/book-list-grid/components/col-size-buttons/col-size-buttons.component';
 
 @NgModule({
   declarations: [
@@ -23,10 +24,11 @@ import {FormsModule} from "@angular/forms";
     DashboardComponent,
     BookComponent,
     BookCardComponent,
-    BookListGridComponent
+    BookListGridComponent,
+    ColSizeButtonsComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,

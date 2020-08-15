@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IBook} from "../../interfaces/book";
+import {fadeInOutAnimation} from "../../animations/fadeInOut.animation";
 
 /**
  * This component builds a grid to show a list of books.
@@ -9,12 +10,14 @@ import {IBook} from "../../interfaces/book";
 @Component({
   selector: 'app-book-list-grid',
   templateUrl: './book-list-grid.component.html',
-  styleUrls: ['./book-list-grid.component.scss']
+  styleUrls: ['./book-list-grid.component.scss'],
+  animations: [fadeInOutAnimation]
 })
 export class BookListGridComponent implements OnInit {
 
   @Input() books: IBook[];
-  colSize: string | number = 6;
+  @Input() withColSizeOptions: boolean = true;
+  colSize: number = 6; // Col size by default in case "withColSizeOptions" is marked as disabled
 
   ngOnInit(): void {
     this.validateInputProps();
@@ -26,7 +29,7 @@ export class BookListGridComponent implements OnInit {
     }
   }
 
-  changeColSize(size: string | number) {
+  changeColSize(size: number) {
     this.colSize = size;
   }
 

@@ -1,0 +1,23 @@
+<div class="row mb-3">
+
+  <div class="col text-right">
+
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+      <label *ngFor="let s of colSizes; index as i"
+             [class.active]="s.isDefault"
+             class="btn btn-secondary">
+
+        <input type="radio" name="options" id="option{{i}}" (click)="changeColSize(s.value)">
+        <img [src]="s.icon" [alt]="s.title" class="col-icon" />
+
+      </label>
+
+    </div>
+    <!-- ./btn-group -->
+
+  </div>
+  <!-- ./col -->
+
+</div>
+<!-- ./row -->

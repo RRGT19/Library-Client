@@ -5,5 +5,5 @@ export interface IBook {
   by: string;
   genre: string
   cover: string;
-  publishedAt: string;
+  publishedAt: Date;
 }

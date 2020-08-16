@@ -31,7 +31,7 @@ export class BookComponent implements OnInit, ICommonViewer {
   }
 
   ngOnInit(): void {
-    const bookId = this.route.snapshot.params['id'];
+    const bookId = this.route.snapshot.params['bookId'];
     this.fetchData(bookId);
   }
 

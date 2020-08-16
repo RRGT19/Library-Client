@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LibraryLayoutComponent} from "./core/layouts/library-layout/library-layout.component";
 import {DashboardComponent} from "./modules/dashboard/dashboard.component";
 import {BookComponent} from "./modules/book/book.component";
+import {BookPageComponent} from "./modules/book-page/book-page.component";
 
 const routes: Routes = [
 
@@ -17,8 +18,14 @@ const routes: Routes = [
         component: DashboardComponent
       },
       {
-        path: 'book/:id',
-        component: BookComponent
+        path: 'book/:bookId',
+        component: BookComponent,
+        children: [
+          {
+            path: 'page/:pageNumber',
+            component: BookPageComponent
+          }
+        ]
       }
     ]
   },

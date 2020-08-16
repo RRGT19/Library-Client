@@ -17,6 +17,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ColSizeButtonsComponent} from './shared/components/book-list-grid/components/col-size-buttons/col-size-buttons.component';
 import {LoadingStateComponent} from './shared/components/loading-state/loading-state.component';
 import {SafeHtmlPipe} from './shared/pipes/safe-html.pipe';
+import { BookPageComponent } from './modules/book-page/book-page.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {SafeHtmlPipe} from './shared/pipes/safe-html.pipe';
     BookListGridComponent,
     ColSizeButtonsComponent,
     LoadingStateComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    BookPageComponent
   ],
   imports: [
     BrowserAnimationsModule,

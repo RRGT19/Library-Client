@@ -11,11 +11,17 @@ import * as faker from 'faker/locale/en_US';
  * to this fake backend service.
  */
 
+// Easy config of the amount of data that is generated.
+const BOOKS_AMOUNT = 6;
+const PAGES_PER_BOOK = 6;
+const PARAGRAPHS_PER_PAGE = 10;
+
 @Injectable({
   providedIn: 'root'
 })
 export class BookFakeService implements InMemoryDbService {
 
+  // Paragraphs used to assign them randomly to book pages.
   paragraphs = [
     "<b>Sit repellat minima omnis voluptate placeat beatae. Nostrum sint velit minus molestiae similique adipisci.</b> " +
     "<i>Est reiciendis provident. Labore corrupti ad est dolor non quaerat mollitia error.</i> " +
@@ -28,17 +34,20 @@ export class BookFakeService implements InMemoryDbService {
     "<strong>Quod enim quis. Ut aspernatur harum accusamus adipisci ab voluptates cupiditate est. Et doloremque autem dolore.</strong> " +
     "Et omnis exercitationem vero asperiores est. Placeat hic est nostrum nihil similique ea voluptas architecto. " +
     "Quo minus voluptatem provident sit nam hic. Non hic rem consectetur doloremque ut. Asperiores est beatae. " +
-    "<small>Tempora esse incidunt animi qui. Sit nostrum laboriosam corrupti quis.</small>"
+    "<small>Tempora esse incidunt animi qui. Sit nostrum laboriosam corrupti quis.</small>",
+    "Optio non qui earum sit iste fuga odit distinctio aperiam. Velit deleniti iusto dolorum nam omnis enim. Ea voluptatem quae optio ipsum. " +
+    "Enim ea quae. Quidem qui quia aliquid est aut amet consequatur. <strong>Aliquid ut modi perferendis.</strong>",
+    "<strong>Quia provident ullam rerum.</strong> Quaerat delectus fuga est consequatur. Voluptas eius quis consequatur aut possimus commodi. " +
+    "Dolorem natus molestias alias. Ut cum et ea accusantium quia sed.",
+    "<small>Officia numquam quibusdam et id voluptatem dolorum et.</small>"
   ];
 
-  constructor() {
-  }
-
+  // Initialize the in-memory-web-api.
   createDb(): {} | Observable<{}> | Promise<{}> {
     const books = this.generateBooks();
     const pages = this.generateBookPages(books);
-    console.log(books);
-    console.log(pages);
+    console.log('All books: ', books);
+    console.log('All pages: ', pages);
     return {books, pages};
   }
 
@@ -46,7 +55,7 @@ export class BookFakeService implements InMemoryDbService {
    * Books
    */
 
-  generateBooks(count = 8): IBook[] {
+  generateBooks(count = BOOKS_AMOUNT): IBook[] {
     let res: IBook[] = [];
     for (let i = 0; i < count; i++) {
       res.push(this.oneBook());
@@ -70,7 +79,7 @@ export class BookFakeService implements InMemoryDbService {
    * Book pages
    */
 
-  generateBookPages(books: IBook[], count = 5): IBookPage[] {
+  generateBookPages(books: IBook[], count = PAGES_PER_BOOK): IBookPage[] {
     let res: IBookPage[] = [];
     books.forEach(book => {
       for (let i = 0; i < count; i++) {
@@ -88,7 +97,7 @@ export class BookFakeService implements InMemoryDbService {
     };
   }
 
-  getPageContent(paragraphsCount = 6): string {
+  getPageContent(paragraphsCount = PARAGRAPHS_PER_PAGE): string {
     let pageContent = "";
     for (let i = 0; i < paragraphsCount; i++) {
       pageContent += faker.random.arrayElement(this.paragraphs) + "<br><br>";

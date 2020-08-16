@@ -15,9 +15,8 @@ import {BookListGridComponent} from './shared/components/book-list-grid/book-lis
 import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ColSizeButtonsComponent} from './shared/components/book-list-grid/components/col-size-buttons/col-size-buttons.component';
-import { LoadingStateComponent } from './shared/components/loading-state/loading-state.component';
-import { SafeHtmlPipe } from './shared/pipes/safe-html.pipe';
-import {PaginationComponent} from "./shared/components/pagination/pagination.component";
+import {LoadingStateComponent} from './shared/components/loading-state/loading-state.component';
+import {SafeHtmlPipe} from './shared/pipes/safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +29,6 @@ import {PaginationComponent} from "./shared/components/pagination/pagination.com
     BookListGridComponent,
     ColSizeButtonsComponent,
     LoadingStateComponent,
-    PaginationComponent,
     SafeHtmlPipe
   ],
   imports: [
@@ -39,7 +37,7 @@ import {PaginationComponent} from "./shared/components/pagination/pagination.com
     FormsModule,
     HttpClientModule,
     environment.production ?
-      [] : HttpClientInMemoryWebApiModule.forRoot(BookFakeService, {delay: 100}) // 1 second delay
+      [] : HttpClientInMemoryWebApiModule.forRoot(BookFakeService, {delay: 1000}),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -55,9 +55,13 @@ export class BookService extends LoadingService {
    * @param to      Until.
    */
   getBookPages(bookId: string, from: number, to: number): Observable<IBookPage[]> {
+    this.showLoading();
     const byBookId = `bookId=${bookId}`;
     const pageRange = `pageNumber=^[${from}-${to}]?$|^${to}$`; // Using a regex pattern.
-    return this.http.get<IBookPage[]>(COMBINE_URL(`pages?${byBookId}&${pageRange}`));
+    return this.http.get<IBookPage[]>(COMBINE_URL(`pages?${byBookId}&${pageRange}`))
+      .pipe(
+        tap(() => this.hideLoading())
+      );
   }
 
 }

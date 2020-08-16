@@ -7,6 +7,9 @@
 
     <div class="blog-post">
 
+      <!-- Message in case there is no more pages for this book -->
+      <ng-container *ngTemplateOutlet="showNoMorePages"></ng-container>
+
       <!-- Using a reusable component -->
       <app-book-card [book]="book"></app-book-card>
 
@@ -18,24 +21,26 @@
 
     </div><!-- /.blog-post -->
 
+    <!-- Message in case there is no more pages for this book -->
+    <ng-container *ngTemplateOutlet="showNoMorePages"></ng-container>
+
+    <!-- Paginator -->
     <nav aria-label="Book paginator" class="float-right">
+
       <ul class="pagination">
-        <li class="page-item">
-          <a class="page-link" href="#" tabindex="-1">Previous</a>
+        <li class="page-item" [class.disabled]="currentPage === 0">
+          <a class="page-link" href="javascript:void(0)" (click)="changePage(currentPage - 1)">Previous</a>
         </li>
-        <li class="page-item">
-          <a class="page-link" href="#">1</a>
+        <li class="page-item"
+            *ngFor="let b of bookPages"
+            [class.active]="b.pageNumber === currentPage">
+          <a class="page-link" href="javascript:void(0)" (click)="changePage(b.pageNumber)">{{b.pageNumber + 1}}</a>
         </li>
-        <li class="page-item active" aria-current="page">
-          <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">3</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
+        <li class="page-item" [class.disabled]="shouldShowNoMoreMessage">
+          <a class="page-link" href="javascript:void(0)" (click)="changePage(currentPage + 1)">Next</a>
         </li>
       </ul>
+
     </nav>
 
   </div>
@@ -43,3 +48,9 @@
 
 </div>
 <!-- /.row -->
+
+<ng-template #showNoMorePages>
+  <div class="alert alert-info" role="alert" *ngIf="shouldShowNoMoreMessage">
+    {{noMorePagesMessage}}
+  </div>
+</ng-template>

@@ -9,6 +9,12 @@ Angular has been used to build the client, making use of some third-party librar
 - [Bootstrap](https://getbootstrap.com/)
 - [Faker](https://github.com/marak/faker.js)
 
+## Dependencies
+
+- Node 10.9.0 or newer
+
+Check the official [Setting up the workspace](https://v8.angular.io/guide/setup-local) for more specific details about the technology.
+
 ## Installation
 
 Angular CLI

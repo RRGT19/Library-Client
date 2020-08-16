@@ -20,13 +20,14 @@
           by <a href="javascript:void(0)">{{book.by}}</a>
         </div>
 
+        <!-- Viewer mode selector -->
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-sm btn-secondary active">
             <input (click)="htmlText()"
                    type="radio"
                    name="options"
                    id="option1"
-                   checked="">
+                   checked>
             HTML
           </label>
           <label class="btn btn-sm btn-secondary">
@@ -43,6 +44,7 @@
 
       <hr>
 
+      <!-- Book page content -->
       <div [innerHtml]="pageBeingViewed.content | safeHtml"></div>
 
     </div>

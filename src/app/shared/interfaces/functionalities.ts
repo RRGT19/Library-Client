@@ -1,5 +1,5 @@
 export interface IPlainViewer {
-  plainText();
+  plainText(keepLineBreaks: boolean);
 }
 
 export interface IHtmlViewer {

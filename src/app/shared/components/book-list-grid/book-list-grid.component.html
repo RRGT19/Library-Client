@@ -1,7 +1,9 @@
 <!-- Buttons to change the col sizes.
      Totally optional by the parent.
 -->
-<app-col-size-buttons *ngIf="withColSizeOptions" (colSizeHasChanged)="changeColSize($event)"></app-col-size-buttons>
+<app-col-size-buttons *ngIf="withColSizeOptions && books.length > 0"
+                      (colSizeHasChanged)="changeColSize($event)">
+</app-col-size-buttons>
 
 <div class="row">
 

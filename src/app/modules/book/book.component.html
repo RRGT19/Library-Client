@@ -1,1 +1,45 @@
-<p>book works!</p>
+<!-- Loading state while fetching data -->
+<app-loading-state *ngIf="bookService.isLoading$ | async"></app-loading-state>
+
+<div class="row">
+
+  <div class="col-md-12 blog-main" *ngIf="book">
+
+    <div class="blog-post">
+
+      <!-- Using a reusable component -->
+      <app-book-card [book]="book"></app-book-card>
+
+      <p class="blog-post-meta">by <a href="javascript:void(0)">{{book.by}}</a></p>
+
+      <hr>
+
+      <div [innerHtml]="pageBeingViewed.content | safeHtml"></div>
+
+    </div><!-- /.blog-post -->
+
+    <nav aria-label="Book paginator" class="float-right">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item active" aria-current="page">
+          <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+  <!-- /.col -->
+
+</div>
+<!-- /.row -->

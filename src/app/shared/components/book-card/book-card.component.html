@@ -10,7 +10,7 @@
       </a>
     </h3>
 
-    <div class="mb-1 text-muted">{{book.publishedAt}}</div>
+    <div class="mb-1 text-muted">{{book.publishedAt | date: 'MMM d'}}</div>
 
     <p class="card-text mb-auto">{{book.description}}</p>
 
@@ -19,7 +19,7 @@
 
   <img [src]="book.cover"
        [alt]="book.title"
-       class="card-img-right flex-auto d-none d-md-block">
+       class="card-img-right flex-auto d-none d-md-block book-cover">
 
 </div>
 <!-- ./card -->

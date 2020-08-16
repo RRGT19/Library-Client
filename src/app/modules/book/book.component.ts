@@ -36,7 +36,7 @@ export class BookComponent implements OnInit, ICommonViewer {
     return !!this.noMorePagesMessage && this.currentPage === (this.bookPages.length - 1);
   }
 
-  fetchData(bookId: string) {
+  fetchData(bookId: string): void {
     // Performs multiple Http requests.
     forkJoin([
       this.bookService.getBookById(bookId),
@@ -49,13 +49,20 @@ export class BookComponent implements OnInit, ICommonViewer {
     });
   }
 
-  htmlText(text: string) {
+  htmlText(text: string): void {
+    this.pageBeingViewed.content = this.bookPages
+      .find(p => p.pageNumber === this.currentPage)
+      .content;
   }
 
-  plainText(text: string) {
+  plainText(text: string): void {
+    this.pageBeingViewed.content = this.bookPages
+      .find(p => p.pageNumber === this.currentPage)
+      .content
+      .replace(/<[^>]*>/g, '');
   }
 
-  changePage(to: number) {
+  changePage(to: number): void {
     if (to === this.currentPage) {
       return;
     }

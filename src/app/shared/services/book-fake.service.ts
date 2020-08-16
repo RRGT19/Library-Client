@@ -93,7 +93,7 @@ export class BookFakeService implements InMemoryDbService {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }
 
-  // Paragraphs used to assign them randomly to book pages.
+  // Paragraphs used to assign them randomly to book pages. Each one includes HTML tags.
   getLoremParagraphs(): string[] {
     return [
       "<b>Sit repellat minima omnis voluptate placeat beatae. Nostrum sint velit minus molestiae similique adipisci.</b> " +

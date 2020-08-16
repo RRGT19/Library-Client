@@ -3,7 +3,13 @@
 
 <div class="row">
 
-  <div class="col-md-12 blog-main" *ngIf="book">
+  <!-- Message in case the book was not found -->
+  <ng-container *ngTemplateOutlet="showNoBook"></ng-container>
+
+  <!-- Message in case the page number was not found -->
+  <ng-container *ngTemplateOutlet="showNoPage"></ng-container>
+
+  <div class="col-md-12 blog-main" *ngIf="book && pageBeingViewed">
 
     <div class="blog-post">
 
@@ -13,7 +19,7 @@
       <!-- Using a reusable component -->
       <app-book-card [book]="book"></app-book-card>
 
-
+      <!-- Utilities -->
       <div class="d-flex justify-content-between">
 
         <div class="blog-post-meta align-self-center">
@@ -40,7 +46,7 @@
         </div>
 
       </div>
-      <!-- /.viewer-mode -->
+      <!-- /.utilities -->
 
       <hr>
 
@@ -53,20 +59,37 @@
     <!-- Message in case there is no more pages for this book -->
     <ng-container *ngTemplateOutlet="showNoMorePages"></ng-container>
 
+    <!-- Go to top button -->
+    <div class="row mb-2" *ngIf="showGoToTopBtn">
+      <div class="col-md-12">
+        <button type="button"
+                (click)="goToTop()"
+                class="btn btn-outline-success float-right">
+          Go to 👆
+        </button>
+      </div>
+    </div>
+
     <!-- Paginator -->
     <nav aria-label="Book paginator" class="float-right">
 
       <ul class="pagination">
         <li class="page-item" [class.disabled]="currentPage === 0">
-          <a class="page-link" href="javascript:void(0)" (click)="changePage(currentPage - 1)">Previous</a>
+          <a class="page-link" href="javascript:void(0)" (click)="changePage(currentPage - 1)">
+            Previous
+          </a>
         </li>
         <li class="page-item"
             *ngFor="let b of bookPages"
-            [class.active]="b.pageNumber === currentPage">
-          <a class="page-link" href="javascript:void(0)" (click)="changePage(b.pageNumber)">{{b.pageNumber + 1}}</a>
+            [class.active]="b.pageNumber === pageBeingViewed.pageNumber">
+          <a class="page-link" href="javascript:void(0)" (click)="changePage(b.pageNumber)">
+            {{b.pageNumber}}
+          </a>
         </li>
         <li class="page-item" [class.disabled]="shouldShowNoMoreMessage">
-          <a class="page-link" href="javascript:void(0)" (click)="changePage(currentPage + 1)">Next</a>
+          <a class="page-link" href="javascript:void(0)" (click)="changePage(currentPage + 1)">
+            Next
+          </a>
         </li>
       </ul>
 
@@ -80,6 +103,24 @@
 
 <ng-template #showNoMorePages>
   <div class="alert alert-info" role="alert" *ngIf="shouldShowNoMoreMessage">
-    {{noMorePagesMessage}}
+    You saw the last page available for this book. Get some rest or read another one.
+  </div>
+</ng-template>
+
+<ng-template #showNoBook>
+  <div class="col-md-12">
+    <div class="alert alert-warning" role="alert" *ngIf="showBookNotFound">
+      Oops! We could not find your book. 😭
+      Try another from the <a routerLink="/dashboard">dashboard</a>.
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #showNoPage>
+  <div class="col-md-12">
+    <div class="alert alert-info" role="alert" *ngIf="showPageNotFound">
+      Oops! We could not find the page number that you are looking for.
+      Instead, we are showing you the last page of this book. 😊
+    </div>
   </div>
 </ng-template>

@@ -33,7 +33,7 @@ export class BookCardComponent implements OnInit {
   }
 
   open() {
-    this.router.navigateByUrl('/book/' + this.book.id + '/page/1');
+    this.router.navigateByUrl('/book/' + this.book.id + '/page/0');
   }
 
 }

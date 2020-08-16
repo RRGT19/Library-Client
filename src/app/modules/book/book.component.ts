@@ -32,7 +32,6 @@ export class BookComponent implements OnInit, ICommonViewer {
 
   ngOnInit(): void {
     const bookId = this.route.snapshot.params['bookId'];
-    this.currentPage = +this.route.snapshot.params['pageNumber'];
     this.fetchData(bookId);
   }
 
@@ -55,7 +54,6 @@ export class BookComponent implements OnInit, ICommonViewer {
       console.log(`Fetching pages. From: ${this.currentPage}, To: 2`)
       this.bookPages = res[1];
       this.pageBeingViewed = Utils.deepCopy(this.bookPages[0]); // Deep copy
-      this.changePage(this.currentPage);
     });
   }
 

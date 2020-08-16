@@ -4,7 +4,7 @@ import {environment} from "../../../environments/environment";
 import {IBook, IBookPage} from "../interfaces/book";
 import {Observable} from "rxjs";
 import {LoadingService} from "./loading.service";
-import {tap} from "rxjs/operators";
+import {finalize} from "rxjs/operators";
 
 // Get the server url based on the environment we are running
 const SERVER_UL = environment.apiUrl;
@@ -32,7 +32,7 @@ export class BookService extends LoadingService {
     this.showLoading();
     return this.http.get<IBook[]>(COMBINE_URL('books'))
       .pipe(
-        tap(() => this.hideLoading())
+        finalize(() => this.hideLoading())
       );
   }
 
@@ -44,7 +44,7 @@ export class BookService extends LoadingService {
     this.showLoading();
     return this.http.get<IBook>(COMBINE_URL(`books/${id}`))
       .pipe(
-        tap(() => this.hideLoading())
+        finalize(() => this.hideLoading())
       );
   }
 
@@ -60,7 +60,7 @@ export class BookService extends LoadingService {
     const pageRange = `pageNumber=^[${from}-${to}]?$|^${to}$`; // Using a regex pattern.
     return this.http.get<IBookPage[]>(COMBINE_URL(`pages?${byBookId}&${pageRange}`))
       .pipe(
-        tap(() => this.hideLoading())
+        finalize(() => this.hideLoading())
       );
   }
 

@@ -9,6 +9,20 @@ Angular has been used to build the client, making use of some third-party librar
 - [Bootstrap](https://getbootstrap.com/)
 - [Faker](https://github.com/marak/faker.js)
 
+## Installation
+
+Angular CLI
+
+```bash
+npm install -g @angular/cli
+```
+
+Project dependencies
+
+```bash
+npm install
+```
+
 ## Rest API
 
 To speed up the development of the client and not have dependence on the advance of the backend that will go to production, we have replicated a Rest API using [Angular in-memory-web-api](https://github.com/angular/in-memory-web-api). This module provides an in memory data store where we can fetch data and simulates a real Rest API backend

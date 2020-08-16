@@ -1,9 +1,9 @@
 export interface IPlainViewer {
-  plainText(text: string);
+  plainText();
 }
 
 export interface IHtmlViewer {
-  htmlText(text: string);
+  htmlText();
 }
 
 export interface ICommonViewer extends IPlainViewer, IHtmlViewer {

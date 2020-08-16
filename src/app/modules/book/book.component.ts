@@ -49,13 +49,13 @@ export class BookComponent implements OnInit, ICommonViewer {
     });
   }
 
-  htmlText(text: string): void {
+  htmlText(): void {
     this.pageBeingViewed.content = this.bookPages
       .find(p => p.pageNumber === this.currentPage)
       .content;
   }
 
-  plainText(text: string): void {
+  plainText(): void {
     this.pageBeingViewed.content = this.bookPages
       .find(p => p.pageNumber === this.currentPage)
       .content

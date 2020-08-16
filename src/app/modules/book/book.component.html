@@ -13,13 +13,40 @@
       <!-- Using a reusable component -->
       <app-book-card [book]="book"></app-book-card>
 
-      <p class="blog-post-meta">by <a href="javascript:void(0)">{{book.by}}</a></p>
+
+      <div class="d-flex justify-content-between">
+
+        <div class="blog-post-meta align-self-center">
+          by <a href="javascript:void(0)">{{book.by}}</a>
+        </div>
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-sm btn-secondary active">
+            <input (click)="htmlText()"
+                   type="radio"
+                   name="options"
+                   id="option1"
+                   checked="">
+            HTML
+          </label>
+          <label class="btn btn-sm btn-secondary">
+            <input (click)="plainText()"
+                   type="radio"
+                   name="options"
+                   id="option2">
+            PLAIN
+          </label>
+        </div>
+
+      </div>
+      <!-- /.viewer-mode -->
 
       <hr>
 
       <div [innerHtml]="pageBeingViewed.content | safeHtml"></div>
 
-    </div><!-- /.blog-post -->
+    </div>
+    <!-- /.blog-post -->
 
     <!-- Message in case there is no more pages for this book -->
     <ng-container *ngTemplateOutlet="showNoMorePages"></ng-container>

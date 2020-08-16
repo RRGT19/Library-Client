@@ -96,7 +96,6 @@ export class BookComponent implements OnInit, ICommonViewer {
     const nextPage = this.bookPages.find(p => p.pageNumber === to);
 
     if (nextPage) {
-
       // Change the content
       console.log(`Changing page. From: ${this.currentPage}, To: ${to}`);
       this.pageBeingViewed = Utils.deepCopy(nextPage);
@@ -105,32 +104,35 @@ export class BookComponent implements OnInit, ICommonViewer {
       this.changeViewMode();
       // Update the browser URL
       this.replaceUrl();
-
     } else {
-
-      console.log(`Fetching more pages. From: ${this.currentPage}, To: ${this.currentPage + 2}`)
-
-      // 1. Fetch more pages
-      this.bookService.getBookPages(this.book.id, to, this.currentPage + 2)
-        // Convert to Promise to avoid keeping track of subscriptions (simplicity for this scenario)
-        .toPromise()
-        .then((pages: IBookPage[]) => {
-
-          if (pages.length > 0) {
-            // 2. Add them locally
-            pages.forEach(newPage => this.bookPages.push(newPage));
-            // 3. Change page (calling this method recursively)
-            this.changePage(to);
-          } else {
-            this.showPageNotFound = false;
-            this.showNoMorePages = true;
-          }
-
-        })
-
+      this.fetchMorePages(to);
     }
 
     this.goToTop();
+  }
+
+  /**
+   * Fetch more pages of this book and add them with the others.
+   * @param from Page number that we want to read.
+   */
+  fetchMorePages(from: number) {
+    console.log(`Fetching more pages. From: ${this.currentPage}, To: ${this.currentPage + 2}`);
+
+    // 1. Fetch more pages
+    this.bookService.getBookPages(this.book.id, from, this.currentPage + 2)
+      // Convert to Promise to avoid keeping track of subscriptions (simplicity for this scenario)
+      .toPromise()
+      .then((pages: IBookPage[]) => {
+        if (pages.length > 0) {
+          // 2. Add them locally
+          pages.forEach(newPage => this.bookPages.push(newPage));
+          // 3. Change page again (recursively)
+          this.changePage(from);
+        } else {
+          this.showPageNotFound = false;
+          this.showNoMorePages = true;
+        }
+      })
   }
 
   /**

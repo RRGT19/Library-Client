@@ -13,7 +13,7 @@ Angular has been used to build the client, making use of some third-party librar
 
 - Node 10.9.0 or newer
 
-Check the official [Setting up the workspace](https://v8.angular.io/guide/setup-local) for more specific details about the technology.
+Check the official [Setting up the workspace](https://angular.io/guide/setup-local) for more specific details about the technology.
 
 ## Installation
 

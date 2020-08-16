@@ -39,7 +39,7 @@ export class BookFakeService implements InMemoryDbService {
     let res: IBook[] = [];
     for (let i = 0; i < count; i++) {
       let book = this.oneBook();
-      book.id = '00' + String(i + 1);
+      book.id = String(i + 1);
       res.push(book);
     }
     return res;

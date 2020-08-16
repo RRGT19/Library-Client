@@ -3,6 +3,9 @@
 
 <div class="row">
 
+  <!-- Message in case the book was not found -->
+  <ng-container *ngTemplateOutlet="showNoBook"></ng-container>
+
   <div class="col-md-12 blog-main" *ngIf="book">
 
     <div class="blog-post">
@@ -12,7 +15,6 @@
 
       <!-- Using a reusable component -->
       <app-book-card [book]="book"></app-book-card>
-
 
       <div class="d-flex justify-content-between">
 
@@ -81,5 +83,14 @@
 <ng-template #showNoMorePages>
   <div class="alert alert-info" role="alert" *ngIf="shouldShowNoMoreMessage">
     {{noMorePagesMessage}}
+  </div>
+</ng-template>
+
+<ng-template #showNoBook>
+  <div class="col-md-12">
+    <div class="alert alert-warning" role="alert" *ngIf="showErrorMessage">
+      Oops! We could not find your book. Seems that the ID has changed.
+      Try another from the <a routerLink="/dashboard">dashboard</a>.
+    </div>
   </div>
 </ng-template>

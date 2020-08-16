@@ -4,6 +4,7 @@ import {ICommonViewer} from "../../shared/interfaces/functionalities";
 import {BookService} from "../../shared/services/book.service";
 import {IBook, IBookPage} from "../../shared/interfaces/book";
 import {forkJoin} from "rxjs";
+import {Location} from '@angular/common';
 import Utils from "../../shared/utilities/Utils";
 
 @Component({
@@ -15,6 +16,7 @@ export class BookComponent implements OnInit, ICommonViewer {
 
   book: IBook;
   bookPages: IBookPage[];
+  showErrorMessage: boolean = false;
 
   // Keep track of the view mode selected
   viewerMode: string = 'HTML';
@@ -26,7 +28,8 @@ export class BookComponent implements OnInit, ICommonViewer {
 
   constructor(
     private route: ActivatedRoute,
-    public bookService: BookService
+    public bookService: BookService,
+    private location: Location
   ) {
   }
 
@@ -49,12 +52,19 @@ export class BookComponent implements OnInit, ICommonViewer {
     forkJoin([
       this.bookService.getBookById(bookId),
       this.bookService.getBookPages(bookId, this.currentPage, 2)
-    ]).subscribe(res => {
-      this.book = res[0];
-      console.log(`Fetching pages. From: ${this.currentPage}, To: 2`)
-      this.bookPages = res[1];
-      this.pageBeingViewed = Utils.deepCopy(this.bookPages[0]); // Deep copy
-    });
+    ]).subscribe(
+      // Success handler function, which is called each time that the stream emits a value
+      res => {
+        this.book = res[0];
+        console.log(`Fetching pages. From: ${this.currentPage}, To: 2`)
+        this.bookPages = res[1];
+        this.pageBeingViewed = Utils.deepCopy(this.bookPages[0]); // Deep copy
+      },
+      // Error handler function, that gets called only if an error occurs. This handler receives the error itself.
+      err => {
+       this.showErrorMessage = true;
+      }
+    );
   }
 
   /**
@@ -114,7 +124,10 @@ export class BookComponent implements OnInit, ICommonViewer {
       console.log(`Changing page. From: ${this.currentPage}, To: ${to}`);
       this.pageBeingViewed = Utils.deepCopy(nextPage);
       this.currentPage = to;
-      this.changeViewMode(); // Use the view mode selected before
+      // Use the view mode selected before
+      this.changeViewMode();
+      // Change the page number in the URL to provide the effect to the user
+      this.location.replaceState(`book/${this.book.id}/page/${this.currentPage}`);
 
     } else {
 

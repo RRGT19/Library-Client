@@ -21,26 +21,6 @@ const PARAGRAPHS_PER_PAGE = 10;
 })
 export class BookFakeService implements InMemoryDbService {
 
-  // Paragraphs used to assign them randomly to book pages.
-  paragraphs = [
-    "<b>Sit repellat minima omnis voluptate placeat beatae. Nostrum sint velit minus molestiae similique adipisci.</b> " +
-    "<i>Est reiciendis provident. Labore corrupti ad est dolor non quaerat mollitia error.</i> " +
-    "Modi dolorem est iure tempora minus eveniet doloribus nihil et. " +
-    "Itaque omnis molestiae voluptatem voluptates sed consequatur voluptas optio. " +
-    "Animi et accusantium qui quidem. In sit autem repellat sequi quis recusandae officia. " +
-    "Voluptas consequuntur enim consequuntur eum rerum iusto harum quia occaecati. " +
-    "<strong>Itaque voluptate optio itaque itaque mollitia omnis. Eos aspernatur sequi corrupti distinctio ut expedita quae. " +
-    "Non ea voluptates velit quidem. Ducimus et dolores. Accusamus fuga quibusdam.</strong>",
-    "<strong>Quod enim quis. Ut aspernatur harum accusamus adipisci ab voluptates cupiditate est. Et doloremque autem dolore.</strong> " +
-    "Et omnis exercitationem vero asperiores est. Placeat hic est nostrum nihil similique ea voluptas architecto. " +
-    "Quo minus voluptatem provident sit nam hic. Non hic rem consectetur doloremque ut. Asperiores est beatae. " +
-    "<small>Tempora esse incidunt animi qui. Sit nostrum laboriosam corrupti quis.</small>",
-    "Optio non qui earum sit iste fuga odit distinctio aperiam. Velit deleniti iusto dolorum nam omnis enim. Ea voluptatem quae optio ipsum. " +
-    "Enim ea quae. Quidem qui quia aliquid est aut amet consequatur. <strong>Aliquid ut modi perferendis.</strong>",
-    "<strong>Quia provident ullam rerum.</strong> Quaerat delectus fuga est consequatur. Voluptas eius quis consequatur aut possimus commodi. " +
-    "Dolorem natus molestias alias. Ut cum et ea accusantium quia sed.",
-    "<small>Officia numquam quibusdam et id voluptatem dolorum et.</small>"
-  ];
 
   // Initialize the in-memory-web-api.
   createDb(): {} | Observable<{}> | Promise<{}> {
@@ -100,7 +80,7 @@ export class BookFakeService implements InMemoryDbService {
   getPageContent(paragraphsCount = PARAGRAPHS_PER_PAGE): string {
     let pageContent = "";
     for (let i = 0; i < paragraphsCount; i++) {
-      pageContent += faker.random.arrayElement(this.paragraphs) + "<br><br>";
+      pageContent += faker.random.arrayElement(this.getLoremParagraphs()) + "<br><br>";
     }
     return pageContent;
   }
@@ -111,6 +91,29 @@ export class BookFakeService implements InMemoryDbService {
 
   capitalizeFirstLetter(word: string): string {
     return word.charAt(0).toUpperCase() + word.slice(1);
+  }
+
+  // Paragraphs used to assign them randomly to book pages.
+  getLoremParagraphs(): string[] {
+    return [
+      "<b>Sit repellat minima omnis voluptate placeat beatae. Nostrum sint velit minus molestiae similique adipisci.</b> " +
+      "<i>Est reiciendis provident. Labore corrupti ad est dolor non quaerat mollitia error.</i> " +
+      "Modi dolorem est iure tempora minus eveniet doloribus nihil et. " +
+      "Itaque omnis molestiae voluptatem voluptates sed consequatur voluptas optio. " +
+      "Animi et accusantium qui quidem. In sit autem repellat sequi quis recusandae officia. " +
+      "Voluptas consequuntur enim consequuntur eum rerum iusto harum quia occaecati. " +
+      "<strong>Itaque voluptate optio itaque itaque mollitia omnis. Eos aspernatur sequi corrupti distinctio ut expedita quae. " +
+      "Non ea voluptates velit quidem. Ducimus et dolores. Accusamus fuga quibusdam.</strong>",
+      "<strong>Quod enim quis. Ut aspernatur harum accusamus adipisci ab voluptates cupiditate est. Et doloremque autem dolore.</strong> " +
+      "Et omnis exercitationem vero asperiores est. Placeat hic est nostrum nihil similique ea voluptas architecto. " +
+      "Quo minus voluptatem provident sit nam hic. Non hic rem consectetur doloremque ut. Asperiores est beatae. " +
+      "<small>Tempora esse incidunt animi qui. Sit nostrum laboriosam corrupti quis.</small>",
+      "Optio non qui earum sit iste fuga odit distinctio aperiam. Velit deleniti iusto dolorum nam omnis enim. Ea voluptatem quae optio ipsum. " +
+      "Enim ea quae. Quidem qui quia aliquid est aut amet consequatur. <strong>Aliquid ut modi perferendis.</strong>",
+      "<strong>Quia provident ullam rerum.</strong> Quaerat delectus fuga est consequatur. Voluptas eius quis consequatur aut possimus commodi. " +
+      "Dolorem natus molestias alias. Ut cum et ea accusantium quia sed.",
+      "<small>Officia numquam quibusdam et id voluptatem dolorum et.</small>"
+    ];
   }
 
 }
